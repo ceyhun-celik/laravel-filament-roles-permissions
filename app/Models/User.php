@@ -16,6 +16,13 @@ class User extends Authenticatable implements FilamentUser
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
+     * The database connection that should be used by the model.
+     *
+     * @var string
+     */
+    protected $connection = 'mysql';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
