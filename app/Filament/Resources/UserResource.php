@@ -6,6 +6,9 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -23,7 +26,20 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make([
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->maxLength(255),
+                    DateTimePicker::make('email_verified_at'),
+                    TextInput::make('password')
+                        ->password()
+                        ->required()
+                        ->maxLength(255),
+                ])
             ]);
     }
 
@@ -31,7 +47,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('email_verified_at')
+                    ->dateTime(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime(),
             ])
             ->filters([
                 //
